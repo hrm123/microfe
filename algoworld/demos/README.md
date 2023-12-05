@@ -41,4 +41,5 @@ npx --ignore-existing create-nx-workspace demos --preset=empty && npm install @n
 
 npx --ignore-existing create-nx-workspace demos --preset=empty 
 npm install --global nx@latest && nx generate @nx/angular:app host
+ npx nx run host:serve --configuration=development 
 nx generate @nrwl/angular:app sorting --routing
