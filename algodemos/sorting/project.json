@@ -1,0 +1,80 @@
+{
+  "name": "sorting",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "sorting/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/sorting",
+        "index": "sorting/src/index.html",
+        "baseHref": "/",
+        "main": "sorting/src/main.tsx",
+        "tsConfig": "sorting/tsconfig.app.json",
+        "assets": ["sorting/src/favicon.ico", "sorting/src/assets"],
+        "styles": ["sorting/src/styles.scss"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "sorting/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "sorting/src/environments/environment.ts",
+              "with": "sorting/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "sorting:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "sorting:build:development"
+        },
+        "production": {
+          "buildTarget": "sorting:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["sorting/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "sorting/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

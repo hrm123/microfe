@@ -2,7 +2,9 @@
   "name": "@algodemos/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "servedev": "concurrently \"npx nx run algohost:serve --port 8000\" \" npx nx run sorting:serve --port 8200 \"  "
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.14.5",
